@@ -1,117 +1,96 @@
-# 🚀 TechEvents - Plataforma de Gestão de Eventos Full Stack
+# 🚀 TechEvents - Plataforma de Eventos Full Stack (Dockerized)
 
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED)
 ![Angular](https://img.shields.io/badge/Angular-17+-red)
-![React](https://img.shields.io/badge/React-Vite-blue)
-![Clean Architecture](https://img.shields.io/badge/Clean-Architecture-purple)
+![React](https://img.shields.io/badge/React-Vite-61DAFB)
 
 ## 📋 Sobre o Projeto
 
-O **TechEvents** é uma solução completa para gerenciamento de eventos de tecnologia, desenvolvida para demonstrar a aplicação de **Clean Architecture** e microsserviços em um ecossistema Full Stack.
+O **TechEvents** é uma solução completa para gestão de eventos, projetada para demonstrar **Arquitetura de Software Sênior**.
 
-O projeto destaca a capacidade de um único **Backend robusto em Java** servir dados simultaneamente para duas interfaces distintas:
-1.  **Backoffice (Angular):** Painel administrativo para criação e gestão de eventos.
-2.  **Portal Público (React):** Landing page performática para exibição de eventos aos usuários.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-### ☕ Backend (API REST)
-* **Linguagem:** Java 21
-* **Framework:** Spring Boot 3
-* **Arquitetura:** Clean Architecture (Hexagonal), separando Domínio, Casos de Uso e Adaptadores.
-* **Banco de Dados:** H2 (In-memory para desenvolvimento rápido).
-* **Destaques:** Validação de DTOs, Tratamento global de erros, Configuração avançada de CORS para múltiplos clientes.
-
-### 🅰️ Frontend Admin (Backoffice)
-* **Framework:** Angular (Latest)
-* **Estilização:** Angular Material (Design System corporativo).
-* **Funcionalidades:** Formulários reativos, comunicação HTTP com tratamento de erros, listagem dinâmica.
-
-### ⚛️ Frontend Público (Portal)
-* **Biblioteca:** React.js com Vite + TypeScript.
-* **Estilização:** Tailwind CSS (Para alta performance e design moderno).
-* **Funcionalidades:** Consumo de API via Hooks personalizados, Renderização de Cards responsivos.
+O sistema implementa uma **Clean Architecture** no Backend, persistência robusta com **PostgreSQL via Docker**, e serve duas interfaces distintas simultaneamente:
+1.  **Backoffice (Angular):** Painel administrativo para gestão de dados.
+2.  **Portal Público (React):** Interface de alta performance para o usuário final.
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## 🏗️ Arquitetura e Infraestrutura
 
-O projeto segue estritamente os princípios da **Clean Architecture**, garantindo que as regras de negócio (Domain) não dependam de frameworks ou bibliotecas externas.
+O projeto foi evoluído de um banco em memória para uma infraestrutura containerizada, garantindo persistência e consistência de dados.
 
 ```mermaid
 graph TD
-    User_React[Usuário (Portal React)] -->|HTTP GET| API
-    Admin_Angular[Admin (Painel Angular)] -->|HTTP POST/GET| API
-    subgraph Backend [Java Spring Boot]
-        API[Controller / API] --> UseCases[Casos de Uso]
-        UseCases --> Domain[Entidades de Domínio]
-        UseCases --> Port[Portas de Saída]
-        Port --> Database[(Banco de Dados H2)]
+    User[Usuário Final] -->|React Portal| API
+    Admin[Administrador] -->|Angular Admin| API
+    subgraph Infrastructure [Docker & Backend]
+        API[Java Spring Boot API] -->|JPA/Hibernate| DB[(PostgreSQL Container)]
     end
 ```
 
-## 📸 Screenshots
-
-### 1. Painel Administrativo (Angular)
-Interface focada em produtividade para criação de eventos.
-![Admin Screen](./screenshots/admin-angular.png)
-
-### 2. Portal Público (React)
-Interface focada na experiência do usuário final.
-![Portal Screen](./screenshots/portal-react.png)
+### 🛠️ Tech Stack
+*   **Core:** Java 21, Spring Boot 3
+*   **Database:** PostgreSQL 16 (Imagem Alpine rodando no Docker)
+*   **Admin Frontend:** Angular + Material Design
+*   **Public Frontend:** React + Tailwind CSS
+*   **DevOps:** Docker Compose para orquestração de ambiente
 
 ---
 
-## 🚀 Como Rodar o Projeto
+## 🚀 Como Rodar o Projeto (Setup Profissional)
 
 ### Pré-requisitos
-* Java 21 JDK
-* Node.js & npm
-* Maven
+*   Docker Desktop instalado e rodando.
+*   Java 21 e Maven.
+*   Node.js.
 
-### 1️⃣ Rodando o Backend (Java)
+### 1️⃣ Subindo a Infraestrutura (Banco de Dados)
+Não é necessário instalar o PostgreSQL na sua máquina. O Docker resolve tudo. Na raiz do projeto, execute:
+
+```bash
+docker compose up -d
+# Isso baixará a imagem do Postgres e iniciará o banco na porta 5432.
+```
+
+### 2️⃣ Rodando o Backend (API)
+
 ```bash
 # Na raiz do projeto (onde está o pom.xml)
 mvn clean spring-boot:run
-# O servidor iniciará em: http://localhost:8080
+# O sistema conectará automaticamente ao Docker e criará as tabelas.
+# API disponível em: http://localhost:8080
 ```
 
-### 2️⃣ Rodando o Backoffice (Angular)
+### 3️⃣ Rodando os Frontends
+
+**Admin (Angular):**
+
 ```bash
 cd frontend-admin
-npm install
 npm start
-# O painel abrirá em: http://localhost:4200
+# Acesso: http://localhost:4200
 ```
 
-### 3️⃣ Rodando o Portal Público (React)
+**Portal (React):**
+
 ```bash
 cd frontend-public
-npm install
 npm run dev
-# O portal abrirá em: http://localhost:5173 (ou porta similar)
+# Acesso: http://localhost:5173
 ```
-
-## 🧠 Desafios Superados & Aprendizados
-
-* **Política de CORS:** Configuração de segurança no Spring Boot para permitir requisições de origens distintas (Angular na porta 4200 e React na 5173) simultaneamente.
-* **Clean Architecture:** Implementação de Portas e Adaptadores para desacoplar o Core Business do Framework Web.
-* **Gestão de Estado:** Manipulação de dados assíncronos tanto no Angular (RxJS) quanto no React (Hooks).
-
-## 👨‍💻 Autor
-
-Desenvolvido por **Filipi Moraes**
-Full Stack Developer | Java & JavaScript Enthusiast
 
 ---
 
-### 💡 Dica do Tech Lead:
+## 🧠 Diferenciais Técnicos Implementados
+*   **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
+*   **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
+*   **CORS Strategy:** Configuração de segurança para permitir múltiplos clientes (Angular/React).
+*   **Clean Code:** Separação clara de responsabilidades (Domain, Infrastructure, Application).
 
-Para deixar esse README matador no GitHub:
-1.  **Crie uma pasta** chamada `screenshots` na raiz do projeto.
-2.  Coloque as imagens que você me mandou lá (renomeie para `admin-angular.png` e `portal-react.png`).
-3.  No README, onde escrevi "*(Insira aqui o print...)*", troque por:
-    `![Admin Screen](./screenshots/admin-angular.png)`
+---
+
+## 👨‍💻 Autor
+Desenvolvido por **Filipi Moraes**
+Engenharia de Software | Java Full Stack
