@@ -32,7 +32,7 @@ public class EventController {
         this.getEventsUseCase = getEventsUseCase;
     }
 
-    @Operation(summary = "Create a new event", description = "Creates a new event with the provided details. Validates input data.")
+    @Operation(summary = "Create a new event", description = "Create and validate a new event.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Event created successfully"),
         @ApiResponse(responseCode = "400", description = "Invalid input data")
@@ -53,7 +53,7 @@ public class EventController {
         return ResponseEntity.created(URI.create("/api/v1/events/" + createdEvent.getId())).body(response);
     }
 
-    @Operation(summary = "Get all events", description = "Retrieves a list of all registered events.")
+    @Operation(summary = "Get all events", description = "Retrieve all registered events.")
     @ApiResponse(responseCode = "200", description = "List of events retrieved successfully")
     @GetMapping
     public ResponseEntity<List<EventResponse>> getAllEvents() {

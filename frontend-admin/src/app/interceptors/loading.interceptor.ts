@@ -16,7 +16,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
       let errorMessage = 'Ocorreu um erro inesperado.';
 
       if (error.status === 400 && error.error) {
-        // Handle Validation Errors (Map<String, String>)
+        // Format validation errors
         if (typeof error.error === 'object') {
           const errors = Object.entries(error.error)
             .map(([field, msg]) => `${field}: ${msg}`)
@@ -33,7 +33,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
 
       snackBar.open(errorMessage, 'Fechar', {
         duration: 5000,
-        panelClass: ['error-snackbar'], // We'll need to define this style
+        panelClass: ['error-snackbar'],
         horizontalPosition: 'center',
         verticalPosition: 'bottom'
       });

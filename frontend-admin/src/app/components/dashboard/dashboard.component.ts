@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   private eventService = inject(EventService);
   events: Event[] = [];
   nextEventDate: Date | null = null;
-  activeUsers: number = 1250; // Mock data for demo
+  activeUsers: number = 1250; // Mock metric
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(data => {

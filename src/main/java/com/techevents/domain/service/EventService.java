@@ -24,19 +24,16 @@ public class EventService implements CreateEventUseCase, GetEventsUseCase {
 
     @Override
     public Event createEvent(String title, String description, String dateStr, String location, String fileName, InputStream bannerContent) {
-        // Upload Banner
         String bannerUrl = null;
         if (fileName != null && bannerContent != null) {
              bannerUrl = storagePort.upload(fileName, bannerContent);
         }
 
-        // Parse Date
         LocalDateTime date = LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
-        // Create Domain Entity (Validation happens in constructor)
+        // Instantiate with internal validation
         Event event = new Event(UUID.randomUUID(), title, description, date, location, bannerUrl);
 
-        // Save
         return eventRepositoryPort.save(event);
     }
 

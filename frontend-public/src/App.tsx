@@ -14,18 +14,17 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-        {/* Header */}
+        
         <header className="bg-white shadow-sm sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-20 items-center">
-              {/* Logo */}
+              
               <div className="flex-shrink-0 flex items-center">
                 <Link to="/" className="text-2xl font-bold text-blue-900 tracking-tight hover:text-blue-700 transition-colors">
                   TechEvents
                 </Link>
               </div>
               
-              {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center space-x-4">
                 <a 
                   href="http://localhost:4200" 
@@ -48,7 +47,6 @@ function App() {
                 </Link>
               </nav>
 
-              {/* Mobile Menu Button */}
               <div className="md:hidden flex items-center">
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -67,7 +65,6 @@ function App() {
             </div>
           </div>
 
-          {/* Mobile Menu Dropdown */}
           {isMenuOpen && (
              <div className="md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-50">
                 <div className="px-4 pt-2 pb-4 space-y-2">

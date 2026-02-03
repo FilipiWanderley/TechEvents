@@ -15,7 +15,6 @@ export interface Event {
 })
 export class EventService {
   private http = inject(HttpClient);
-  // Using /api/v1/events to match the backend implementation
   private apiUrl = 'http://localhost:8080/api/v1/events';
 
   getEvents(): Observable<Event[]> {
