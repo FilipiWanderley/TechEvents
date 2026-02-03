@@ -95,6 +95,7 @@ Este projeto implementa padrões exigidos em grandes corporações:
 
 ### 📚 Documentação Viva (Swagger UI)
 Acesse `/swagger-ui.html` para testar os endpoints interativamente.
+![Swagger UI](assets/swagger-print.png)
 
 ### 🖥️ Dashboard Administrativo (Angular)
 Gestão de eventos com feedback visual e métricas.
