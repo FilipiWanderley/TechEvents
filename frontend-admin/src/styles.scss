@@ -26,3 +26,10 @@ body {
   --mdc-protected-button-container-color: var(--primary-color);
   --mdc-protected-button-label-text-color: white;
 }
+
+/* SnackBar Styles */
+.error-snackbar {
+  --mdc-snackbar-container-color: #f44336; /* Red 500 */
+  --mdc-snackbar-supporting-text-color: white;
+  --mat-snack-bar-button-color: white;
+}

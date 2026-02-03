@@ -1,113 +1,145 @@
 # 🚀 TechEvents - Plataforma de Gestão de Eventos Full Stack
 
-![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-24.0-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-17-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-green?style=for-the-badge&logo=spring)
+![Angular](https://img.shields.io/badge/Angular-17-dd0031?style=for-the-badge&logo=angular)
+![React](https://img.shields.io/badge/React-Vite-61dafb?style=for-the-badge&logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql)
+![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ed?style=for-the-badge&logo=docker)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Passing-success?style=for-the-badge&logo=github-actions)
 
-## 🎯 Sobre o Projeto
-
-**TechEvents** é uma solução corporativa de ponta a ponta para gestão de eventos tecnológicos. Projetada com foco em escalabilidade e experiência do usuário, a plataforma integra um **Portal Público** de alta performance (React) para descoberta de eventos e um **Painel Administrativo** robusto (Angular) para gestão estratégica.
-
-Tudo isso é orquestrado por um **Backend** construído sobre os princípios de **Clean Architecture** (Spring Boot), garantindo desacoplamento, testabilidade e fácil manutenção, com persistência de dados segura e containerizada (Docker/PostgreSQL).
+> **Desenvolvido por [Filipi Moraes](https://www.linkedin.com/in/seu-linkedin)**
+> *Engenheiro de Software | Java Full Stack Specialist*
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## 🎯 Visão do Produto (Product Vision)
+
+**TechEvents** é uma solução corporativa *End-to-End* para gestão de eventos tecnológicos. Projetada para alta escalabilidade, a plataforma resolve o problema de desconexão entre a área pública (vendas) e a área administrativa (gestão).
+
+O diferencial técnico é a implementação de um ecossistema de microsserviços simulado, onde múltiplas interfaces (React e Angular) consomem uma API Centralizada e Dockerizada.
+
+---
+
+## 🏗️ Arquitetura da Solução
+
+A arquitetura foi desenhada seguindo princípios de **Clean Architecture** e **12-Factor App**, garantindo que o Frontend seja agnóstico ao Backend e que a infraestrutura seja efêmera (Docker).
+
+### Fluxo de Dados (Data Flow)
 
 ```mermaid
 graph TD
-    User[👤 Usuário Público] -->|Acessa| React[⚛️ Portal Público (React)]
-    Admin[👔 Administrador] -->|Gerencia| Angular[🅰️ Painel Admin (Angular)]
-    
-    React -->|Consome JSON| API[☕ Backend API (Spring Boot)]
-    Angular -->|Consome JSON| API
-    
-    API -->|Persiste Dados| DB[(🐘 PostgreSQL)]
-    
-    subgraph Docker Infrastructure
-        DB
+    subgraph Clients ["🖥️ Camada de Apresentação (Frontend)"]
+        React["⚛️ Portal Público (React/Vite)"]
+        Angular["🅰️ Painel Admin (Angular 17)"]
     end
+
+    subgraph Backend ["☕ Camada de Aplicação (API)"]
+        API["Spring Boot REST API<br/>(Validation & Security)"]
+    end
+
+    subgraph Infra ["💾 Camada de Persistência (Docker)"]
+        DB[("🐘 PostgreSQL 16")]
+    end
+
+    React -->|HTTP/JSON| API
+    Angular -->|HTTP/JSON| API
+    API -->|JPA/Hibernate| DB
 ```
+
+## 📂 Estrutura de Código (Project Structure)
+
+Organização baseada em domínios para facilitar manutenção e testes:
+
+```bash
+TechEvents/
+├── 🐳 docker-compose.yml       # Orquestração da Infraestrutura (BD)
+├── ☕ src/                     # Código Fonte Backend (Spring Boot)
+│   ├── main/java/com/techevents/
+│   │   ├── domain/             # Regras de Negócio (Entities)
+│   │   ├── api/                # Controllers & DTOs (Validation)
+│   │   ├── service/            # Lógica de Aplicação
+│   │   └── infra/              # Configurações (Cors, Swagger, ExceptionHandler)
+│   └── test/                   # Testes Unitários (JUnit 5)
+├── 📜 pom.xml                  # Dependências Maven
+├── ⚛️ frontend-public/         # Portal React (User Experience)
+│   ├── src/components/         # UI Components (Cards, Navbar)
+│   └── src/services/           # Integração com API
+└── 🅰️ frontend-admin/          # Dashboard Angular (Backoffice)
+    ├── src/app/pages/          # Módulos (Dashboard, Events)
+    └── src/app/interceptors/   # Tratamento Global de Erros
+```
+
+## ✨ Diferenciais de Engenharia (Elite Features)
+
+Este projeto implementa padrões exigidos em grandes corporações (Accenture, ThoughtWorks, etc):
+
+### 🛡️ Backend (Java 21 + Spring Boot)
+*   **Documentation First:** API 100% documentada via OpenAPI (Swagger UI).
+*   **Data Shielding:** Uso rigoroso de Bean Validation (`@NotNull`, `@Size`) para impedir "Lixo" no banco de dados.
+*   **Resilience:** Tratamento global de erros (`@ControllerAdvice`), transformando StackTraces em mensagens JSON amigáveis (RFC 7807).
+*   **Testing:** Cobertura de testes unitários no Service Layer com Mockito.
+
+### 🎨 Frontend (React & Angular)
+*   **Design System:** Interfaces consistentes inspiradas no padrão SaaS (Luma/Eventbrite).
+*   **Feedback Loop:** O usuário sempre sabe o status da ação (Toasts de Sucesso, Spinners de Loading, Snackbars de Erro).
+*   **Interceptor Pattern (Angular):** Captura automática de requisições HTTP para gerenciar Loaders globais.
+*   **Mobile-First:** Layouts responsivos que se adaptam de Smartphones a Desktops.
+
+### 🔄 DevOps & Automação
+*   **CI/CD Pipeline:** Workflow do GitHub Actions configurado. A cada push na main, o sistema roda automaticamente o build e os testes unitários para garantir qualidade.
 
 ---
 
-## ✨ Principais Funcionalidades (Key Features)
+## 📸 Galeria do Projeto
 
-### ☕ Backend (Core)
-*   **Clean Architecture:** Separação clara entre Domínio, Aplicação e Infraestrutura.
-*   **API RESTful:** Endpoints padronizados para CRUD de eventos.
-*   **Data Persistence:** PostgreSQL 16 rodando via Docker Compose.
-*   **Segurança & Configuração:** CORS configurado para múltiplos ambientes.
-*   **Qualidade & CI/CD:** Testes Unitários (JUnit 5 + Mockito) e Pipeline automatizada (GitHub Actions).
+### 📚 Documentação Viva (Swagger UI)
+Acesse `/swagger-ui.html` para testar os endpoints interativamente.
 
-### ⚛️ Frontend Público (React)
-*   **Design System Moderno:** Interface inspirada em plataformas SaaS/Luma.
-*   **Mobile-First:** Layout 100% responsivo com Menu Hambúrguer e Grids adaptáveis.
-*   **Integração Robusta:** Tratamento de erros de API e integração de imagens.
-*   **UX Aprimorada:** Feedback visual com Toastify e Skeleton Loaders.
+### 🖥️ Dashboard Administrativo (Angular)
+Gestão de eventos com feedback visual e métricas.
 
-### 🅰️ Frontend Admin (Angular)
-*   **Dashboard Executivo:** Visualização rápida de KPIs e métricas.
-*   **Gestão Completa:** Tabelas estilizadas com paginação e ações de CRUD.
-*   **Navegação SPA:** Roteamento fluido com Lazy Loading e Sidebar responsiva.
-*   **Feedback Visual:** Loading Interceptors (Barra de progresso global), Validação de Formulários e SnackBars.
+### 🌐 Portal de Eventos (React)
+Interface pública focada na experiência do usuário.
 
 ---
 
 ## 🚀 Como Executar (Getting Started)
-
-Siga os passos abaixo para rodar a aplicação completa em seu ambiente local.
 
 ### Pré-requisitos
 *   Docker & Docker Compose
 *   Java JDK 21
 *   Node.js 20+
 
-### Passo 1: Infraestrutura (Banco de Dados)
-Suba o container do PostgreSQL:
+### Passo 1: Infraestrutura
 ```bash
 docker compose up -d
 ```
 
-### Passo 2: Backend (API)
-Inicie o servidor Spring Boot:
+### Passo 2: Backend
 ```bash
 mvn spring-boot:run
 ```
-*O servidor iniciará em `http://localhost:8080`*
+*   **API:** `http://localhost:8080`
+*   **Swagger:** `http://localhost:8080/swagger-ui.html`
 
 ### Passo 3: Frontends
-Em terminais separados, inicie as interfaces:
 
-**Portal Público (React):**
+**Portal Público:**
 ```bash
-cd frontend-public
-npm install
-npm run dev
+cd frontend-public && npm run dev
 ```
-*Acesse em `http://localhost:5173`*
 
-**Painel Admin (Angular):**
+**Painel Admin:**
 ```bash
-cd frontend-admin
-npm install
-npm start
+cd frontend-admin && npm start
 ```
-*Acesse em `http://localhost:4200`*
 
 ---
 
-## 📸 Galeria
+## 👨‍💻 Autor
 
-### 🖥️ Dashboard Administrativo
-![Dashboard Screenshot](https://via.placeholder.com/800x450?text=Screenshot+Dashboard+Admin)
+<img style="border-radius: 50%;" src="https://github.com/FilipiWanderley.png" width="100px;" alt="Filipi Moraes"/>
 
-### 🌐 Portal de Eventos
-![Portal Screenshot](https://via.placeholder.com/800x450?text=Screenshot+Portal+Publico)
-
-### 📱 Responsividade Mobile
-![Mobile Screenshot](https://via.placeholder.com/300x600?text=Mobile+View)
+**Filipi Moraes**
+*Software Engineer | Full Stack Java Specialist*

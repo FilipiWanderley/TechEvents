@@ -33,7 +33,7 @@ class EventServiceTest {
     }
 
     @Test
-    void shouldCreateEventSuccessfully() {
+    void createEvent_Success() {
         // Given
         String title = "TechEvents Launch";
         String description = "Official Platform Launch";
@@ -57,6 +57,25 @@ class EventServiceTest {
         // Verify dependencies
         verify(eventRepositoryPort, times(1)).save(any(Event.class));
         verifyNoInteractions(storagePort); // No file provided, so no upload
+    }
+
+    @Test
+    void createEvent_Exception_NullTitle() {
+        // Given
+        String title = null; // Invalid
+        String description = "Valid Description";
+        String futureDateStr = LocalDateTime.now().plusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String location = "Valid Location";
+
+        // When & Then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            eventService.createEvent(title, description, futureDateStr, location, null, null);
+        });
+
+        assertEquals("Event title cannot be null or empty", exception.getMessage());
+        
+        // Verify repository is NOT called
+        verify(eventRepositoryPort, never()).save(any());
     }
 
     @Test

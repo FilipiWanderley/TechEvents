@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { LoadingService } from './services/loading.service';
@@ -21,6 +22,7 @@ import { LoadingService } from './services/loading.service';
     MatIconModule,
     MatSidenavModule,
     MatProgressBarModule,
+    MatSnackBarModule,
     CommonModule
   ],
   templateUrl: './app.html',
