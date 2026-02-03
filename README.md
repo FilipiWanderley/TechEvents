@@ -83,14 +83,24 @@ npm run dev
 
 ---
 
-## 🧠 Diferenciais Técnicos Implementados
-*   **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
-*   **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
-*   **Design System Consistente:**
-    *   **React (Portal):** Interface imersiva com Hero Section, busca inteligente e Cards modernos.
-    *   **Angular (Admin):** Layout corporativo com Sidebar Dark, Navegação SPA (Router), Dashboard com Métricas (KPIs) e Configurações.
-*   **CORS Strategy:** Configuração de segurança para permitir múltiplos clientes (Angular/React).
-*   **Clean Code:** Separação clara de responsabilidades (Domain, Infrastructure, Application).
+## 🌟 Diferenciais e Funcionalidades
+
+### 🎨 Frontend Público (React)
+* **Design System Moderno:** Interface estilo SaaS ("Eventure") focada em conversão.
+* **UX Aprimorada:** Feedback visual nos botões, sombras suaves e layout responsivo.
+* **Integração Visual:** Renderização de cards com imagens de capa via URL.
+
+### 💼 Backoffice (Angular)
+* **Dashboard Executivo:** Visão geral com Cards de Métricas (KPIs) e status do sistema.
+* **Navegação SPA:** Roteamento fluido via **Angular Router** (sem recarregar a página) entre Dashboard, Gestão de Eventos e Configurações.
+* **Sidebar Dinâmica:** Menu lateral com indicação de rota ativa (`routerLinkActive`).
+* **CRUD Completo:** Criação e listagem de eventos integrada ao Backend.
+
+### ⚙️ Backend & Infraestrutura
+* **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
+* **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
+* **Clean Code:** Arquitetura Hexagonal com separação clara de responsabilidades (Domain, Infrastructure, Application).
+* **Segurança:** Estratégia CORS configurada para permitir múltiplos clientes simultâneos.
 
 ---
 
