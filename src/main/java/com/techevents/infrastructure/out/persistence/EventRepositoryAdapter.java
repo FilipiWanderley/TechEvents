@@ -10,29 +10,29 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
-public class EventPersistenceAdapter implements EventRepositoryPort {
+public class EventRepositoryAdapter implements EventRepositoryPort {
 
-    private final JpaEventRepository jpaEventRepository;
+    private final SpringDataEventRepository springDataEventRepository;
 
-    public EventPersistenceAdapter(JpaEventRepository jpaEventRepository) {
-        this.jpaEventRepository = jpaEventRepository;
+    public EventRepositoryAdapter(SpringDataEventRepository springDataEventRepository) {
+        this.springDataEventRepository = springDataEventRepository;
     }
 
     @Override
     public Event save(Event event) {
         EventEntity entity = toEntity(event);
-        EventEntity savedEntity = jpaEventRepository.save(entity);
+        EventEntity savedEntity = springDataEventRepository.save(entity);
         return toDomain(savedEntity);
     }
 
     @Override
     public Optional<Event> findById(UUID id) {
-        return jpaEventRepository.findById(id).map(this::toDomain);
+        return springDataEventRepository.findById(id).map(this::toDomain);
     }
 
     @Override
     public List<Event> findAll() {
-        return jpaEventRepository.findAll().stream()
+        return springDataEventRepository.findAll().stream()
                 .map(this::toDomain)
                 .collect(Collectors.toList());
     }
@@ -43,7 +43,8 @@ public class EventPersistenceAdapter implements EventRepositoryPort {
             event.getTitle(),
             event.getDescription(),
             event.getDate(),
-            event.getLocation()
+            event.getLocation(),
+            event.getBannerUrl()
         );
     }
 
@@ -53,7 +54,8 @@ public class EventPersistenceAdapter implements EventRepositoryPort {
             entity.getTitle(),
             entity.getDescription(),
             entity.getDate(),
-            entity.getLocation()
+            entity.getLocation(),
+            entity.getBannerUrl()
         );
     }
 }

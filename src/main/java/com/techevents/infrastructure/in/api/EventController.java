@@ -27,9 +27,17 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody EventRequest request) {
-        Event event = new Event(null, request.title(), request.description(), request.date(), request.location());
-        Event createdEvent = createEventUseCase.createEvent(event);
+    public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody CreateEventRequest request) {
+        // Note: Passing null for banner file/content as this endpoint currently only supports JSON.
+        // Future improvement: Support MultipartFile or separate upload endpoint.
+        Event createdEvent = createEventUseCase.createEvent(
+            request.title(),
+            request.description(),
+            request.date(),
+            request.location(),
+            null, // fileName
+            null  // bannerContent
+        );
         
         EventResponse response = toResponse(createdEvent);
 
@@ -50,7 +58,8 @@ public class EventController {
             event.getTitle(),
             event.getDescription(),
             event.getDate(),
-            event.getLocation()
+            event.getLocation(),
+            event.getBannerUrl()
         );
     }
 }

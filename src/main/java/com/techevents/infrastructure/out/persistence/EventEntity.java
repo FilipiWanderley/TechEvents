@@ -15,15 +15,17 @@ public class EventEntity {
     private String description;
     private LocalDateTime date;
     private String location;
+    private String bannerUrl;
 
     public EventEntity() {}
 
-    public EventEntity(UUID id, String title, String description, LocalDateTime date, String location) {
+    public EventEntity(UUID id, String title, String description, LocalDateTime date, String location, String bannerUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
         this.location = location;
+        this.bannerUrl = bannerUrl;
     }
 
     public UUID getId() { return id; }
@@ -36,4 +38,6 @@ public class EventEntity {
     public void setDate(LocalDateTime date) { this.date = date; }
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+    public String getBannerUrl() { return bannerUrl; }
+    public void setBannerUrl(String bannerUrl) { this.bannerUrl = bannerUrl; }
 }

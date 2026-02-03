@@ -8,5 +8,6 @@ public record EventResponse(
     String title,
     String description,
     LocalDateTime date,
-    String location
+    String location,
+    String bannerUrl
 ) {}
