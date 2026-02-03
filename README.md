@@ -72,7 +72,7 @@ TechEvents/
 
 ## ✨ Diferenciais de Engenharia (Elite Features)
 
-Este projeto implementa padrões exigidos em grandes corporações (Accenture, ThoughtWorks, etc):
+Este projeto implementa padrões exigidos em grandes corporações:
 
 ### 🛡️ Backend (Java 21 + Spring Boot)
 *   **Documentation First:** API 100% documentada via OpenAPI (Swagger UI).
