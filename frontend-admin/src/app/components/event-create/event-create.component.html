@@ -11,11 +11,13 @@
         <mat-label>Título do Evento</mat-label>
         <input matInput formControlName="title" placeholder="Ex: Tech Conference 2024">
         <mat-error *ngIf="eventForm.get('title')?.hasError('required')">Título é obrigatório</mat-error>
+        <mat-error *ngIf="eventForm.get('title')?.hasError('maxlength')">Máximo de 255 caracteres</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Descrição</mat-label>
         <textarea matInput formControlName="description" rows="4" placeholder="Detalhes do evento..."></textarea>
+        <mat-error *ngIf="eventForm.get('description')?.hasError('maxlength')">Máximo de 1000 caracteres</mat-error>
       </mat-form-field>
 
       <div class="row">
@@ -31,6 +33,7 @@
           <mat-label>Localização</mat-label>
           <input matInput formControlName="location" placeholder="Ex: São Paulo, SP">
           <mat-error *ngIf="eventForm.get('location')?.hasError('required')">Local é obrigatório</mat-error>
+          <mat-error *ngIf="eventForm.get('location')?.hasError('maxlength')">Máximo de 255 caracteres</mat-error>
         </mat-form-field>
       </div>
     </div>

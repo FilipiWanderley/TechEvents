@@ -1,12 +1,14 @@
 
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, inject } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
     MatButtonModule, 
     MatIconModule,
     MatSidenavModule,
+    MatProgressBarModule,
     CommonModule
   ],
   templateUrl: './app.html',
@@ -26,6 +29,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 export class AppComponent implements AfterViewInit {
   title = 'frontend-admin';
   isMobile = false;
+  loadingService = inject(LoadingService);
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 

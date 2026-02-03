@@ -1,120 +1,113 @@
-# 🚀 TechEvents - Plataforma de Eventos Full Stack (Dockerized)
+# 🚀 TechEvents - Plataforma de Gestão de Eventos Full Stack
 
-![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
-![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED)
-![Angular](https://img.shields.io/badge/Angular-17+-red)
-![React](https://img.shields.io/badge/React-Vite-61DAFB)
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-24.0-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-17-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-## 📋 Sobre o Projeto
+## 🎯 Sobre o Projeto
 
-O **TechEvents** é uma solução completa para gestão de eventos, projetada para demonstrar **Arquitetura de Software Sênior**.
+**TechEvents** é uma solução corporativa de ponta a ponta para gestão de eventos tecnológicos. Projetada com foco em escalabilidade e experiência do usuário, a plataforma integra um **Portal Público** de alta performance (React) para descoberta de eventos e um **Painel Administrativo** robusto (Angular) para gestão estratégica.
 
-O sistema implementa uma **Clean Architecture** no Backend, persistência robusta com **PostgreSQL via Docker**, e serve duas interfaces distintas simultaneamente, ambas **100% Responsivas (Mobile-First)**:
-
-1.  **Backoffice (Angular):** Painel administrativo moderno estilo SaaS com Dashboard, KPIs e navegação adaptável.
-2.  **Portal Público (React):** Interface de alta performance para o usuário final com UX refinada e design system "Eventure".
+Tudo isso é orquestrado por um **Backend** construído sobre os princípios de **Clean Architecture** (Spring Boot), garantindo desacoplamento, testabilidade e fácil manutenção, com persistência de dados segura e containerizada (Docker/PostgreSQL).
 
 ---
 
-## 🏗️ Arquitetura e Infraestrutura
-
-O projeto foi evoluído de um banco em memória para uma infraestrutura containerizada, garantindo persistência e consistência de dados.
+## 🏗️ Arquitetura do Sistema
 
 ```mermaid
 graph TD
-    User[Usuário Final] -->|React Portal (Mobile/Desktop)| API
-    Admin[Administrador] -->|Angular Admin (Responsive)| API
-    subgraph Infrastructure [Docker & Backend]
-        API[Java Spring Boot API] -->|JPA/Hibernate| DB[(PostgreSQL Container)]
+    User[👤 Usuário Público] -->|Acessa| React[⚛️ Portal Público (React)]
+    Admin[👔 Administrador] -->|Gerencia| Angular[🅰️ Painel Admin (Angular)]
+    
+    React -->|Consome JSON| API[☕ Backend API (Spring Boot)]
+    Angular -->|Consome JSON| API
+    
+    API -->|Persiste Dados| DB[(🐘 PostgreSQL)]
+    
+    subgraph Docker Infrastructure
+        DB
     end
 ```
 
-### 🛠️ Tech Stack
-*   **Core:** Java 21, Spring Boot 3
-*   **Database:** PostgreSQL 16 (Imagem Alpine rodando no Docker)
-*   **Admin Frontend:** Angular 17+ (Material Design, Router SPA, Responsive Sidenav, KPIs)
-*   **Public Frontend:** React + Tailwind CSS (Responsive Grid, Mobile Menu, Modern UI Kit)
-*   **DevOps:** Docker Compose para orquestração de ambiente
+---
+
+## ✨ Principais Funcionalidades (Key Features)
+
+### ☕ Backend (Core)
+*   **Clean Architecture:** Separação clara entre Domínio, Aplicação e Infraestrutura.
+*   **API RESTful:** Endpoints padronizados para CRUD de eventos.
+*   **Data Persistence:** PostgreSQL 16 rodando via Docker Compose.
+*   **Segurança & Configuração:** CORS configurado para múltiplos ambientes.
+*   **Qualidade & CI/CD:** Testes Unitários (JUnit 5 + Mockito) e Pipeline automatizada (GitHub Actions).
+
+### ⚛️ Frontend Público (React)
+*   **Design System Moderno:** Interface inspirada em plataformas SaaS/Luma.
+*   **Mobile-First:** Layout 100% responsivo com Menu Hambúrguer e Grids adaptáveis.
+*   **Integração Robusta:** Tratamento de erros de API e integração de imagens.
+*   **UX Aprimorada:** Feedback visual com Toastify e Skeleton Loaders.
+
+### 🅰️ Frontend Admin (Angular)
+*   **Dashboard Executivo:** Visualização rápida de KPIs e métricas.
+*   **Gestão Completa:** Tabelas estilizadas com paginação e ações de CRUD.
+*   **Navegação SPA:** Roteamento fluido com Lazy Loading e Sidebar responsiva.
+*   **Feedback Visual:** Loading Interceptors (Barra de progresso global), Validação de Formulários e SnackBars.
 
 ---
 
-## 🚀 Como Rodar o Projeto (Setup Profissional)
+## 🚀 Como Executar (Getting Started)
+
+Siga os passos abaixo para rodar a aplicação completa em seu ambiente local.
 
 ### Pré-requisitos
-*   Docker Desktop instalado e rodando.
-*   Java 21 e Maven.
-*   Node.js.
+*   Docker & Docker Compose
+*   Java JDK 21
+*   Node.js 20+
 
-### 1️⃣ Subindo a Infraestrutura (Banco de Dados)
-Não é necessário instalar o PostgreSQL na sua máquina. O Docker resolve tudo. Na raiz do projeto, execute:
-
+### Passo 1: Infraestrutura (Banco de Dados)
+Suba o container do PostgreSQL:
 ```bash
 docker compose up -d
-# Isso baixará a imagem do Postgres e iniciará o banco na porta 5432.
 ```
 
-### 2️⃣ Rodando o Backend (API)
-
+### Passo 2: Backend (API)
+Inicie o servidor Spring Boot:
 ```bash
-# Na raiz do projeto (onde está o pom.xml)
-mvn clean spring-boot:run
-# O sistema conectará automaticamente ao Docker e criará as tabelas.
-# API disponível em: http://localhost:8080
+mvn spring-boot:run
 ```
+*O servidor iniciará em `http://localhost:8080`*
 
-### 3️⃣ Rodando os Frontends
+### Passo 3: Frontends
+Em terminais separados, inicie as interfaces:
 
-**Admin (Angular):**
-
-```bash
-cd frontend-admin
-npm start
-# Acesso: http://localhost:4200
-```
-
-**Portal (React):**
-
+**Portal Público (React):**
 ```bash
 cd frontend-public
+npm install
 npm run dev
-# Acesso: http://localhost:5173
 ```
+*Acesse em `http://localhost:5173`*
+
+**Painel Admin (Angular):**
+```bash
+cd frontend-admin
+npm install
+npm start
+```
+*Acesse em `http://localhost:4200`*
 
 ---
 
-## 🌟 Diferenciais e Funcionalidades
+## 📸 Galeria
 
-### 📱 Responsividade & Mobile-First (Novo!)
-*   **React Portal:** 
-    *   Navbar adaptável com **Menu Hambúrguer** para dispositivos móveis.
-    *   Grid de eventos fluido (1 coluna no mobile, 2 no tablet, 3-4 no desktop).
-*   **Angular Admin:**
-    *   **Sidebar Inteligente:** Fixa no desktop, transformando-se em Drawer (menu lateral deslizante) no mobile.
-    *   **Toolbar Dinâmica:** Botão de menu exclusivo para telas pequenas.
-    *   **Layout Flexível:** Tabelas com scroll horizontal e KPIs que se empilham verticalmente.
+### 🖥️ Dashboard Administrativo
+![Dashboard Screenshot](https://via.placeholder.com/800x450?text=Screenshot+Dashboard+Admin)
 
-### 🎨 Frontend Público (React)
-*   **Design System Moderno:** Interface estilo SaaS ("Eventure") focada em conversão.
-*   **UX Aprimorada:** Feedback visual nos botões, sombras suaves e layout responsivo.
-*   **Integração Visual:** Renderização de cards com imagens de capa via URL.
+### 🌐 Portal de Eventos
+![Portal Screenshot](https://via.placeholder.com/800x450?text=Screenshot+Portal+Publico)
 
-### 💼 Backoffice (Angular)
-*   **Dashboard Executivo:** Visão geral com Cards de Métricas (KPIs) e status do sistema.
-*   **Navegação SPA:** Roteamento fluido via **Angular Router** (sem recarregar a página) entre Dashboard, Gestão de Eventos e Configurações.
-*   **Fluxo de Navegação Completo:** Integração bidirecional com o Portal Público (Login/Logout).
-*   **Sidebar Dinâmica:** Menu lateral com indicação de rota ativa (`routerLinkActive`).
-*   **CRUD Completo:** Criação e listagem de eventos integrada ao Backend.
-
-### ⚙️ Backend & Infraestrutura
-*   **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
-*   **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
-*   **Clean Code:** Arquitetura Hexagonal com separação clara de responsabilidades (Domain, Infrastructure, Application).
-*   **Segurança:** Estratégia CORS configurada para permitir múltiplos clientes simultâneos.
-
----
-
-## 👨‍💻 Autor
-Desenvolvido por **Filipi Moraes**
-Engenheiro de Software | Java Full Stack
+### 📱 Responsividade Mobile
+![Mobile Screenshot](https://via.placeholder.com/300x600?text=Mobile+View)

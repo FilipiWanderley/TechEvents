@@ -37,10 +37,10 @@ export class EventCreateComponent {
   private snackBar = inject(MatSnackBar);
 
   eventForm = this.fb.group({
-    title: ['', Validators.required],
-    description: [''],
+    title: ['', [Validators.required, Validators.maxLength(255)]],
+    description: ['', [Validators.maxLength(1000)]],
     date: [null, Validators.required],
-    location: ['', Validators.required]
+    location: ['', [Validators.required, Validators.maxLength(255)]]
   });
 
   onSubmit() {

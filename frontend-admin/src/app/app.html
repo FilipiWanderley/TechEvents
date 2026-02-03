@@ -29,6 +29,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="main-content">
+    <mat-progress-bar *ngIf="loadingService.loading()" mode="indeterminate" class="global-loader"></mat-progress-bar>
     <header class="top-bar">
       <div class="flex items-center gap-4">
         <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isMobile" class="menu-btn">

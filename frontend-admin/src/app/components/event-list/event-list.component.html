@@ -41,6 +41,16 @@
           </td>
         </ng-container>
 
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="w-24 text-right"> Ações </th>
+          <td mat-cell *matCellDef="let event" class="text-right">
+            <button mat-icon-button color="warn" (click)="deleteEvent(event.id!)" matTooltip="Excluir Evento">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></tr>
       </table>

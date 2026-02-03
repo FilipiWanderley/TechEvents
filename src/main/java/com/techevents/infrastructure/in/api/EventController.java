@@ -3,6 +3,10 @@ package com.techevents.infrastructure.in.api;
 import com.techevents.domain.model.Event;
 import com.techevents.domain.port.in.CreateEventUseCase;
 import com.techevents.domain.port.in.GetEventsUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin; 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/events")
+@Tag(name = "Events", description = "Operations related to event management")
 public class EventController {
 
     private final CreateEventUseCase createEventUseCase;
@@ -27,6 +32,11 @@ public class EventController {
         this.getEventsUseCase = getEventsUseCase;
     }
 
+    @Operation(summary = "Create a new event", description = "Creates a new event with the provided details. Validates input data.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Event created successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid input data")
+    })
     @PostMapping
     public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody CreateEventRequest request) {
         Event createdEvent = createEventUseCase.createEvent(
@@ -43,6 +53,8 @@ public class EventController {
         return ResponseEntity.created(URI.create("/api/v1/events/" + createdEvent.getId())).body(response);
     }
 
+    @Operation(summary = "Get all events", description = "Retrieves a list of all registered events.")
+    @ApiResponse(responseCode = "200", description = "List of events retrieved successfully")
     @GetMapping
     public ResponseEntity<List<EventResponse>> getAllEvents() {
         List<EventResponse> events = getEventsUseCase.getAllEvents().stream()

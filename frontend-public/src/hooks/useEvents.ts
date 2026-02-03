@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Event } from '../types';
+import { toast } from 'react-toastify';
 
 export const useEvents = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -16,7 +17,9 @@ export const useEvents = () => {
         const data = await response.json();
         setEvents(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+        setError(errorMessage);
+        toast.error('Falha ao conectar com o servidor.');
       } finally {
         setLoading(false);
       }
