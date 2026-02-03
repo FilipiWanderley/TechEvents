@@ -8,7 +8,7 @@
 ![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ed?style=for-the-badge&logo=docker)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Passing-success?style=for-the-badge&logo=github-actions)
 
-> **Desenvolvido por [Filipi Moraes](https://www.linkedin.com/in/seu-linkedin)**
+> **Desenvolvido por [Filipi Moraes](https://www.linkedin.com/in/filipimoraes/)**
 > *Engenheiro de Software | Java Full Stack Specialist*
 
 ---
@@ -72,7 +72,7 @@ TechEvents/
 
 ## ✨ Diferenciais de Engenharia (Elite Features)
 
-Este projeto implementa padrões exigidos em grandes corporações (Accenture, ThoughtWorks, etc):
+Este projeto implementa padrões exigidos em grandes corporações:
 
 ### 🛡️ Backend (Java 21 + Spring Boot)
 *   **Documentation First:** API 100% documentada via OpenAPI (Swagger UI).
