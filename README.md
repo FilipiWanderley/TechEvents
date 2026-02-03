@@ -98,10 +98,12 @@ Acesse `/swagger-ui.html` para testar os endpoints interativamente.
 ![Swagger UI](assets/swagger-print.png)
 
 ### 🖥️ Dashboard Administrativo (Angular)
-Gestão de eventos com feedback visual e métricas.
+*Gestão de eventos com feedback visual e métricas.*
+![Admin Dashboard](assets/admin-dashboard.png)
 
 ### 🌐 Portal de Eventos (React)
-Interface pública focada na experiência do usuário.
+Interface pública focada na experiência do usuário com novo design.
+![Portal React](assets/portal-react.png)
 
 ### 🧠 User Experience & Security Patterns 
 * **Smart Redirects:** Implementação de lógica de redirecionamento pós-login (`?next=/events/123`), preservando a jornada do usuário. 
