@@ -103,6 +103,11 @@ Gestão de eventos com feedback visual e métricas.
 ### 🌐 Portal de Eventos (React)
 Interface pública focada na experiência do usuário.
 
+### 🧠 User Experience & Security Patterns 
+* **Smart Redirects:** Implementação de lógica de redirecionamento pós-login (`?next=/events/123`), preservando a jornada do usuário. 
+* **Context Aware UI:** Painéis de Login segregados (User vs Admin) com validações visuais. 
+* **Global Interceptors:** Arquitetura reativa no Angular para gestão centralizada de Loaders e Erros HTTP. 
+
 ---
 
 ## 🚀 Como Executar (Getting Started)
