@@ -93,6 +93,7 @@ npm run dev
 ### 💼 Backoffice (Angular)
 * **Dashboard Executivo:** Visão geral com Cards de Métricas (KPIs) e status do sistema.
 * **Navegação SPA:** Roteamento fluido via **Angular Router** (sem recarregar a página) entre Dashboard, Gestão de Eventos e Configurações.
+* **Fluxo de Navegação Completo:** Integração bidirecional com o Portal Público (Login/Logout).
 * **Sidebar Dinâmica:** Menu lateral com indicação de rota ativa (`routerLinkActive`).
 * **CRUD Completo:** Criação e listagem de eventos integrada ao Backend.
 

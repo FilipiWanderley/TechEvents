@@ -65,6 +65,16 @@
         opacity: 0.5;
         cursor: not-allowed;
       }
+
+      &.logout {
+        margin-top: auto;
+        color: #ef4444; /* Red-500 */
+        
+        &:hover {
+          background-color: rgba(239, 68, 68, 0.1);
+          color: #dc2626; /* Red-600 */
+        }
+      }
     }
   }
   

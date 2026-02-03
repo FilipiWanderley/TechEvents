@@ -22,4 +22,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'frontend-admin';
+
+  logout() {
+    window.location.href = 'http://localhost:5173';
+  }
 }
