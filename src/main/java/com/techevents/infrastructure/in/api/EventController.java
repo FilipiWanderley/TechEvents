@@ -4,6 +4,7 @@ import com.techevents.domain.model.Event;
 import com.techevents.domain.port.in.CreateEventUseCase;
 import com.techevents.domain.port.in.GetEventsUseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin; 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,15 +29,13 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody CreateEventRequest request) {
-        // Note: Passing null for banner file/content as this endpoint currently only supports JSON.
-        // Future improvement: Support MultipartFile or separate upload endpoint.
         Event createdEvent = createEventUseCase.createEvent(
             request.title(),
             request.description(),
             request.date().toString(),
             request.location(),
-            null, // fileName
-            null  // bannerContent
+            null, 
+            null  
         );
         
         EventResponse response = toResponse(createdEvent);
