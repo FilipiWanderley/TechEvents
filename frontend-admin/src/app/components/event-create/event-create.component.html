@@ -1,0 +1,45 @@
+
+<div class="create-card">
+  <div class="card-header">
+    <h2>Criar Novo Evento</h2>
+    <p>Preencha as informações abaixo para adicionar um evento ao sistema</p>
+  </div>
+  
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Título do Evento</mat-label>
+        <input matInput formControlName="title" placeholder="Ex: Tech Conference 2024">
+        <mat-error *ngIf="eventForm.get('title')?.hasError('required')">Título é obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="description" rows="4" placeholder="Detalhes do evento..."></textarea>
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="eventForm.get('date')?.hasError('required')">Data é obrigatória</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Localização</mat-label>
+          <input matInput formControlName="location" placeholder="Ex: São Paulo, SP">
+          <mat-error *ngIf="eventForm.get('location')?.hasError('required')">Local é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-button type="button" routerLink="/events" class="cancel-btn">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="eventForm.invalid" class="submit-btn">
+        <mat-icon>check</mat-icon> Criar Evento
+      </button>
+    </div>
+  </form>
+</div>

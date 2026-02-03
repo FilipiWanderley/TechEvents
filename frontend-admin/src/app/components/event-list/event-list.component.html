@@ -1,0 +1,87 @@
+
+<div class="page-container">
+  
+  <!-- KPI Section -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon blue">
+        <mat-icon>event_note</mat-icon>
+      </div>
+      <div class="kpi-info">
+        <span class="label">Total de Eventos</span>
+        <span class="value">{{events.length}}</span>
+      </div>
+    </div>
+    
+    <div class="kpi-card">
+      <div class="kpi-icon purple">
+        <mat-icon>schedule</mat-icon>
+      </div>
+      <div class="kpi-info">
+        <span class="label">Próximo Evento</span>
+        <span class="value">{{ nextEventDate ? (nextEventDate | date:'dd/MM') : '-' }}</span>
+      </div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon green">
+        <mat-icon>dns</mat-icon> <!-- Changed to DNS/Server icon -->
+      </div>
+      <div class="kpi-info">
+        <span class="label">Status do Sistema</span>
+        <span class="value success">Online</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-container mat-elevation-z4"> <!-- elevation handled by css shadow -->
+    <div class="table-header">
+      <div class="header-title">
+        <h3>Todos os Eventos</h3>
+        <span class="subtitle">Gerencie seus eventos tech</span>
+      </div>
+      <button mat-raised-button color="primary" routerLink="/events/new" class="create-btn">
+        <mat-icon>add</mat-icon> Novo Evento
+      </button>
+    </div>
+
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="events">
+        
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let event"> <span class="id-badge">#{{event.id}}</span> </td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Evento </th>
+          <td mat-cell *matCellDef="let event"> 
+            <span class="event-title">{{event.title}}</span>
+          </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Data </th>
+          <td mat-cell *matCellDef="let event"> 
+            <div class="date-badge">
+              <mat-icon>calendar_today</mat-icon>
+              {{event.date | date:'dd MMM yyyy, HH:mm'}} 
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></tr>
+      </table>
+      
+      <div *ngIf="events.length === 0" class="empty-state">
+        <mat-icon>event_busy</mat-icon>
+        <p>Nenhum evento cadastrado.</p>
+      </div>
+    </div>
+  </div>
+</div>

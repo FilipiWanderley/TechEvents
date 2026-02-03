@@ -1,3 +1,4 @@
+
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -17,53 +18,32 @@ import { EventService, Event } from '../../services/event.service';
     RouterModule,
     DatePipe
   ],
-  template: `
-    <div class="container">
-      <div class="header">
-        <h1>Events</h1>
-        <button mat-raised-button color="primary" routerLink="/events/new">
-          <mat-icon>add</mat-icon> New Event
-        </button>
-      </div>
-
-      <table mat-table [dataSource]="events" class="mat-elevation-z8">
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let event"> {{event.id}} </td>
-        </ng-container>
-
-        <!-- Title Column -->
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef> Title </th>
-          <td mat-cell *matCellDef="let event"> {{event.title}} </td>
-        </ng-container>
-
-        <!-- Date Column -->
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Date </th>
-          <td mat-cell *matCellDef="let event"> {{event.date | date:'medium'}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
-  `,
-  styles: [`
-    .container { padding: 20px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    table { width: 100%; }
-  `]
+  templateUrl: './event-list.component.html',
+  styleUrls: ['./event-list.component.scss']
 })
 export class EventListComponent implements OnInit {
   private eventService = inject(EventService);
   events: Event[] = [];
   displayedColumns: string[] = ['id', 'title', 'date'];
+  nextEventDate: Date | null = null;
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(data => {
       this.events = data;
+      this.calculateNextEvent();
     });
+  }
+
+  calculateNextEvent() {
+    const now = new Date();
+    // Filter future events and sort by date
+    const futureEvents = this.events
+      .map(e => ({ ...e, dateObj: new Date(e.date) }))
+      .filter(e => e.dateObj >= now)
+      .sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
+    
+    if (futureEvents.length > 0) {
+      this.nextEventDate = futureEvents[0].dateObj;
+    }
   }
 }

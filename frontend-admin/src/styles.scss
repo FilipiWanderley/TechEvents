@@ -1,3 +1,28 @@
+
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --primary-color: #2563eb; /* Royal Blue */
+  --sidebar-bg: #1e293b; /* Dark Slate */
+  --sidebar-text: #e2e8f0;
+  --bg-color: #f3f4f6; /* Light Gray */
+  --text-color: #1f2937;
+  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Inter', Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Material Overrides */
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: var(--primary-color);
+  --mdc-protected-button-label-text-color: white;
+}
