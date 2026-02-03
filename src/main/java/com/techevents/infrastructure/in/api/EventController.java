@@ -2,22 +2,28 @@ package com.techevents.infrastructure.in.api;
 
 import com.techevents.domain.model.Event;
 import com.techevents.domain.port.in.CreateEventUseCase;
+import com.techevents.domain.port.in.GetEventsUseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/events")
 public class EventController {
 
     private final CreateEventUseCase createEventUseCase;
+    private final GetEventsUseCase getEventsUseCase;
 
-    public EventController(CreateEventUseCase createEventUseCase) {
+    public EventController(CreateEventUseCase createEventUseCase, GetEventsUseCase getEventsUseCase) {
         this.createEventUseCase = createEventUseCase;
+        this.getEventsUseCase = getEventsUseCase;
     }
 
     @PostMapping
@@ -25,14 +31,26 @@ public class EventController {
         Event event = new Event(null, request.title(), request.description(), request.date(), request.location());
         Event createdEvent = createEventUseCase.createEvent(event);
         
-        EventResponse response = new EventResponse(
-            createdEvent.getId(),
-            createdEvent.getTitle(),
-            createdEvent.getDescription(),
-            createdEvent.getDate(),
-            createdEvent.getLocation()
-        );
+        EventResponse response = toResponse(createdEvent);
 
         return ResponseEntity.created(URI.create("/api/v1/events/" + createdEvent.getId())).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EventResponse>> getAllEvents() {
+        List<EventResponse> events = getEventsUseCase.getAllEvents().stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(events);
+    }
+
+    private EventResponse toResponse(Event event) {
+        return new EventResponse(
+            event.getId(),
+            event.getTitle(),
+            event.getDescription(),
+            event.getDate(),
+            event.getLocation()
+        );
     }
 }

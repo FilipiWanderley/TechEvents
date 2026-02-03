@@ -2,11 +2,13 @@ package com.techevents.domain.service;
 
 import com.techevents.domain.model.Event;
 import com.techevents.domain.port.in.CreateEventUseCase;
+import com.techevents.domain.port.in.GetEventsUseCase;
 import com.techevents.domain.port.out.EventRepositoryPort;
 
+import java.util.List;
 import java.util.UUID;
 
-public class EventService implements CreateEventUseCase {
+public class EventService implements CreateEventUseCase, GetEventsUseCase {
 
     private final EventRepositoryPort eventRepositoryPort;
 
@@ -24,5 +26,10 @@ public class EventService implements CreateEventUseCase {
              event = new Event(UUID.randomUUID(), event.getTitle(), event.getDescription(), event.getDate(), event.getLocation());
         }
         return eventRepositoryPort.save(event);
+    }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return eventRepositoryPort.findAll();
     }
 }
