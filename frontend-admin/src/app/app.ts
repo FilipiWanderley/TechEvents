@@ -1,10 +1,12 @@
 
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +17,32 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule, 
     MatButtonModule, 
     MatIconModule,
+    MatSidenavModule,
     CommonModule
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'frontend-admin';
+  isMobile = false;
+
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  constructor(private observer: BreakpointObserver) {}
+
+  ngAfterViewInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+      this.isMobile = res.matches;
+      if (this.isMobile) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
+  }
 
   logout() {
     window.location.href = 'http://localhost:5173';

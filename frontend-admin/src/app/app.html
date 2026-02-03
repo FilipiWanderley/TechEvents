@@ -1,6 +1,5 @@
-
-<div class="app-container">
-  <aside class="sidebar">
+<mat-sidenav-container class="app-container">
+  <mat-sidenav #sidenav class="sidebar" [attr.role]="'navigation'">
     <div class="logo">
       <span class="highlight">TechEvents</span> Admin
     </div>
@@ -27,13 +26,19 @@
     <div class="sidebar-footer">
       <span class="version">v1.0.0</span>
     </div>
-  </aside>
+  </mat-sidenav>
 
-  <main class="main-content">
+  <mat-sidenav-content class="main-content">
     <header class="top-bar">
-      <div class="breadcrumbs">
-        <span class="text-gray">Admin</span> / <span class="font-bold">Eventos</span>
+      <div class="flex items-center gap-4">
+        <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isMobile" class="menu-btn">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="breadcrumbs">
+          <span class="text-gray">Admin</span> / <span class="font-bold">Eventos</span>
+        </div>
       </div>
+      
       <div class="user-actions">
         <button class="icon-btn">
           <mat-icon>notifications</mat-icon>
@@ -48,5 +53,5 @@
     <div class="content-wrapper">
       <router-outlet></router-outlet>
     </div>
-  </main>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

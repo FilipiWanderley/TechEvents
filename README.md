@@ -11,9 +11,10 @@
 
 O **TechEvents** é uma solução completa para gestão de eventos, projetada para demonstrar **Arquitetura de Software Sênior**.
 
-O sistema implementa uma **Clean Architecture** no Backend, persistência robusta com **PostgreSQL via Docker**, e serve duas interfaces distintas simultaneamente:
-1.  **Backoffice (Angular):** Painel administrativo moderno estilo SaaS (Dashboard com KPIs).
-2.  **Portal Público (React):** Interface de alta performance para o usuário final com UX refinada.
+O sistema implementa uma **Clean Architecture** no Backend, persistência robusta com **PostgreSQL via Docker**, e serve duas interfaces distintas simultaneamente, ambas **100% Responsivas (Mobile-First)**:
+
+1.  **Backoffice (Angular):** Painel administrativo moderno estilo SaaS com Dashboard, KPIs e navegação adaptável.
+2.  **Portal Público (React):** Interface de alta performance para o usuário final com UX refinada e design system "Eventure".
 
 ---
 
@@ -23,8 +24,8 @@ O projeto foi evoluído de um banco em memória para uma infraestrutura containe
 
 ```mermaid
 graph TD
-    User[Usuário Final] -->|React Portal| API
-    Admin[Administrador] -->|Angular Admin| API
+    User[Usuário Final] -->|React Portal (Mobile/Desktop)| API
+    Admin[Administrador] -->|Angular Admin (Responsive)| API
     subgraph Infrastructure [Docker & Backend]
         API[Java Spring Boot API] -->|JPA/Hibernate| DB[(PostgreSQL Container)]
     end
@@ -33,8 +34,8 @@ graph TD
 ### 🛠️ Tech Stack
 *   **Core:** Java 21, Spring Boot 3
 *   **Database:** PostgreSQL 16 (Imagem Alpine rodando no Docker)
-*   **Admin Frontend:** Angular 17+ (Material Design, Router SPA, KPIs, Dashboard, SaaS Layout)
-*   **Public Frontend:** React + Tailwind CSS (Modern UI Kit 'Eventure')
+*   **Admin Frontend:** Angular 17+ (Material Design, Router SPA, Responsive Sidenav, KPIs)
+*   **Public Frontend:** React + Tailwind CSS (Responsive Grid, Mobile Menu, Modern UI Kit)
 *   **DevOps:** Docker Compose para orquestração de ambiente
 
 ---
@@ -85,23 +86,32 @@ npm run dev
 
 ## 🌟 Diferenciais e Funcionalidades
 
+### 📱 Responsividade & Mobile-First (Novo!)
+*   **React Portal:** 
+    *   Navbar adaptável com **Menu Hambúrguer** para dispositivos móveis.
+    *   Grid de eventos fluido (1 coluna no mobile, 2 no tablet, 3-4 no desktop).
+*   **Angular Admin:**
+    *   **Sidebar Inteligente:** Fixa no desktop, transformando-se em Drawer (menu lateral deslizante) no mobile.
+    *   **Toolbar Dinâmica:** Botão de menu exclusivo para telas pequenas.
+    *   **Layout Flexível:** Tabelas com scroll horizontal e KPIs que se empilham verticalmente.
+
 ### 🎨 Frontend Público (React)
-* **Design System Moderno:** Interface estilo SaaS ("Eventure") focada em conversão.
-* **UX Aprimorada:** Feedback visual nos botões, sombras suaves e layout responsivo.
-* **Integração Visual:** Renderização de cards com imagens de capa via URL.
+*   **Design System Moderno:** Interface estilo SaaS ("Eventure") focada em conversão.
+*   **UX Aprimorada:** Feedback visual nos botões, sombras suaves e layout responsivo.
+*   **Integração Visual:** Renderização de cards com imagens de capa via URL.
 
 ### 💼 Backoffice (Angular)
-* **Dashboard Executivo:** Visão geral com Cards de Métricas (KPIs) e status do sistema.
-* **Navegação SPA:** Roteamento fluido via **Angular Router** (sem recarregar a página) entre Dashboard, Gestão de Eventos e Configurações.
-* **Fluxo de Navegação Completo:** Integração bidirecional com o Portal Público (Login/Logout).
-* **Sidebar Dinâmica:** Menu lateral com indicação de rota ativa (`routerLinkActive`).
-* **CRUD Completo:** Criação e listagem de eventos integrada ao Backend.
+*   **Dashboard Executivo:** Visão geral com Cards de Métricas (KPIs) e status do sistema.
+*   **Navegação SPA:** Roteamento fluido via **Angular Router** (sem recarregar a página) entre Dashboard, Gestão de Eventos e Configurações.
+*   **Fluxo de Navegação Completo:** Integração bidirecional com o Portal Público (Login/Logout).
+*   **Sidebar Dinâmica:** Menu lateral com indicação de rota ativa (`routerLinkActive`).
+*   **CRUD Completo:** Criação e listagem de eventos integrada ao Backend.
 
 ### ⚙️ Backend & Infraestrutura
-* **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
-* **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
-* **Clean Code:** Arquitetura Hexagonal com separação clara de responsabilidades (Domain, Infrastructure, Application).
-* **Segurança:** Estratégia CORS configurada para permitir múltiplos clientes simultâneos.
+*   **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
+*   **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
+*   **Clean Code:** Arquitetura Hexagonal com separação clara de responsabilidades (Domain, Infrastructure, Application).
+*   **Segurança:** Estratégia CORS configurada para permitir múltiplos clientes simultâneos.
 
 ---
 
