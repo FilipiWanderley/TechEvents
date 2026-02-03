@@ -34,7 +34,7 @@ graph TD
 *   **Core:** Java 21, Spring Boot 3
 *   **Database:** PostgreSQL 16 (Imagem Alpine rodando no Docker)
 *   **Admin Frontend:** Angular + Material Design
-*   **Public Frontend:** React + Tailwind CSS
+*   **Public Frontend:** React + Tailwind CSS (Modern UI Kit 'Eventure')
 *   **DevOps:** Docker Compose para orquestração de ambiente
 
 ---
@@ -87,6 +87,7 @@ npm run dev
 *   **Persistência Real:** Migração de H2 para PostgreSQL para garantir integridade de dados.
 *   **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
 *   **CORS Strategy:** Configuração de segurança para permitir múltiplos clientes (Angular/React).
+*   **UX/UI Moderno:** Interface do Portal Público totalmente redesenhada com Tailwind CSS, focada em conversão e experiência do usuário.
 *   **Clean Code:** Separação clara de responsabilidades (Domain, Infrastructure, Application).
 
 ---
