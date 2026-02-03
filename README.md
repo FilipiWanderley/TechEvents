@@ -33,7 +33,7 @@ graph TD
 ### 🛠️ Tech Stack
 *   **Core:** Java 21, Spring Boot 3
 *   **Database:** PostgreSQL 16 (Imagem Alpine rodando no Docker)
-*   **Admin Frontend:** Angular 17+ (Material Design, KPIs, Dashboard, SaaS Layout)
+*   **Admin Frontend:** Angular 17+ (Material Design, Router SPA, KPIs, Dashboard, SaaS Layout)
 *   **Public Frontend:** React + Tailwind CSS (Modern UI Kit 'Eventure')
 *   **DevOps:** Docker Compose para orquestração de ambiente
 
@@ -88,7 +88,7 @@ npm run dev
 *   **Containerização:** Uso de Docker Compose para setup de ambiente em um comando.
 *   **Design System Consistente:**
     *   **React (Portal):** Interface imersiva com Hero Section, busca inteligente e Cards modernos.
-    *   **Angular (Admin):** Layout corporativo com Sidebar Dark, Métricas em tempo real (KPIs) e Data Tables avançadas.
+    *   **Angular (Admin):** Layout corporativo com Sidebar Dark, Navegação SPA (Router), Dashboard com Métricas (KPIs) e Configurações.
 *   **CORS Strategy:** Configuração de segurança para permitir múltiplos clientes (Angular/React).
 *   **Clean Code:** Separação clara de responsabilidades (Domain, Infrastructure, Application).
 

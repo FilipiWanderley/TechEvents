@@ -1,0 +1,57 @@
+<div class="page-container">
+  <div class="welcome-section">
+    <h1>Visão Geral do Sistema</h1>
+    <p class="subtitle">Bem-vindo ao painel administrativo do TechEvents.</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon blue">
+        <mat-icon>event_note</mat-icon>
+      </div>
+      <div class="kpi-info">
+        <span class="label">Total de Eventos</span>
+        <span class="value">{{events.length}}</span>
+      </div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon purple">
+        <mat-icon>people</mat-icon>
+      </div>
+      <div class="kpi-info">
+        <span class="label">Usuários Ativos</span>
+        <span class="value">{{activeUsers}}</span>
+      </div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon green">
+        <mat-icon>trending_up</mat-icon>
+      </div>
+      <div class="kpi-info">
+        <span class="label">Próximo Evento</span>
+        <span class="value success" *ngIf="nextEventDate; else noNextEvent">
+          {{nextEventDate | date:'dd/MM'}}
+        </span>
+        <ng-template #noNextEvent>
+          <span class="value">-</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-placeholder">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Atividade Recente</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="placeholder-content">
+          <mat-icon>bar_chart</mat-icon>
+          <p>Gráfico de inscrições nos últimos 30 dias</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

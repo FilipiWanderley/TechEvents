@@ -25,25 +25,10 @@ export class EventListComponent implements OnInit {
   private eventService = inject(EventService);
   events: Event[] = [];
   displayedColumns: string[] = ['id', 'title', 'date'];
-  nextEventDate: Date | null = null;
 
   ngOnInit() {
     this.eventService.getEvents().subscribe(data => {
       this.events = data;
-      this.calculateNextEvent();
     });
-  }
-
-  calculateNextEvent() {
-    const now = new Date();
-    // Filter future events and sort by date
-    const futureEvents = this.events
-      .map(e => ({ ...e, dateObj: new Date(e.date) }))
-      .filter(e => e.dateObj >= now)
-      .sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
-    
-    if (futureEvents.length > 0) {
-      this.nextEventDate = futureEvents[0].dateObj;
-    }
   }
 }

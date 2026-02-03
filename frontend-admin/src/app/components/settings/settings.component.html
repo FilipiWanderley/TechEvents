@@ -1,0 +1,66 @@
+<div class="page-container">
+  <div class="header-section">
+    <h1>Configurações</h1>
+    <p class="subtitle">Gerencie as preferências do sistema</p>
+  </div>
+
+  <div class="settings-grid">
+    <mat-card class="settings-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>person</mat-icon>
+        <mat-card-title>Perfil do Administrador</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="settings-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput value="Admin User">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput value="admin@techevents.com">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button>Cancelar</button>
+        <button mat-flat-button color="primary">Salvar Alterações</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="settings-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>tune</mat-icon>
+        <mat-card-title>Preferências do Sistema</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="toggle-list">
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <span class="label">Notificações por Email</span>
+              <span class="description">Receber alertas sobre novos eventos</span>
+            </div>
+            <mat-slide-toggle [checked]="true" color="primary"></mat-slide-toggle>
+          </div>
+          
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <span class="label">Modo Escuro</span>
+              <span class="description">Ativar tema escuro na interface</span>
+            </div>
+            <mat-slide-toggle [checked]="false" color="primary"></mat-slide-toggle>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-info">
+              <span class="label">Manutenção</span>
+              <span class="description">Colocar sistema em modo de manutenção</span>
+            </div>
+            <mat-slide-toggle [checked]="false" color="warn"></mat-slide-toggle>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
