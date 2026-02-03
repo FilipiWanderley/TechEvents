@@ -33,7 +33,7 @@ public class EventController {
         Event createdEvent = createEventUseCase.createEvent(
             request.title(),
             request.description(),
-            request.date(),
+            request.date().toString(),
             request.location(),
             null, // fileName
             null  // bannerContent
