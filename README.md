@@ -93,4 +93,4 @@ npm run dev
 
 ## 👨‍💻 Autor
 Desenvolvido por **Filipi Moraes**
-Engenharia de Software | Java Full Stack
+Engenheiro de Software | Java Full Stack
