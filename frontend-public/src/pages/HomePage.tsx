@@ -6,26 +6,29 @@ export function HomePage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <div className="relative bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-20 px-4 sm:px-6 lg:px-8">
-            <main className="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
+      <div className="relative min-h-screen overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover"
+          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
+          alt="Pessoas em conferência tech"
+        />
+        <div className="overlay-smooth"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="pt-24 pb-12 lg:pt-32 lg:pb-24 lg:w-1/2">
+            <main>
               <div className="sm:text-center lg:text-left">
-                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                <h1 className="text-4xl tracking-tight font-extrabold text-white drop-shadow-lg sm:text-5xl md:text-6xl">
                   <span className="block xl:inline">Descubra os melhores</span>{' '}
-                  <span className="block text-blue-600 xl:inline">eventos tech</span>
+                  <span className="block text-blue-400 xl:inline">eventos tech</span>
                 </h1>
-                <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                <p className="mt-3 text-base text-gray-200 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                   Conecte-se com desenvolvedores, designers e inovadores. Encontre conferências, meetups e workshops para impulsionar sua carreira.
                 </p>
-                
-                {/* Search Bar */}
                 <div className="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start">
-                  <div className="relative rounded-full shadow-lg w-full max-w-lg">
+                  <div className="relative rounded-full shadow-lg w-full max-w-lg bg-white/90">
                     <input 
                       type="text" 
-                      className="block w-full rounded-full border-0 py-4 pl-6 pr-14 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-full border-0 py-4 pl-6 pr-14 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 bg-transparent"
                       placeholder="Buscar por evento, local ou tema..." 
                     />
                     <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
@@ -40,16 +43,6 @@ export function HomePage() {
               </div>
             </main>
           </div>
-        </div>
-        
-        {/* Decorative Hero Image/Pattern */}
-        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-50">
-          <img
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90"
-            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
-            alt="Pessoas em conferência tech"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent lg:via-white/20"></div>
         </div>
       </div>
 

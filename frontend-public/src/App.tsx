@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { HelpPage } from './pages/HelpPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,13 +40,12 @@ function App() {
                 >
                   Ajuda
                 </Link>
-                <a 
-                  href="http://localhost:4200"
-                  target="_self"
+                <Link 
+                  to="/login"
                   className="ml-4 px-6 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-colors shadow-sm"
                 >
                   Login
-                </a>
+                </Link>
               </nav>
 
               {/* Mobile Menu Button */}
@@ -85,14 +86,13 @@ function App() {
                   >
                     Ajuda
                   </Link>
-                  <a 
-                    href="http://localhost:4200"
-                    target="_self"
+                  <Link 
+                    to="/login"
                     className="block px-3 py-3 rounded-md text-base font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 font-bold"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Login
-                  </a>
+                  </Link>
                 </div>
              </div>
           )}
@@ -102,6 +102,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/help" element={<HelpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/events/:id/register" element={<RegisterPage />} />
         </Routes>
 
         {/* Footer */}

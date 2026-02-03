@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import type { Event } from '../types';
 import { toast } from 'react-toastify';
+import { isAuthenticated } from '../auth';
+import { useNavigate } from 'react-router-dom';
 
 interface EventCardProps {
   event: Event;
@@ -8,6 +10,7 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const dateObj = new Date(event.date);
   
   // Format day (e.g., "04")
@@ -21,42 +24,12 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
   // Default image if bannerUrl is missing
   const imageUrl = event.bannerUrl || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80";
 
-  const handleSubscribe = async () => {
-    setIsLoading(true);
-    try {
-      // Simulating a subscription request. 
-      // We use the create event endpoint with invalid data to demonstrate error handling as requested.
-      // To test success, we would send valid data, but here we want to trigger the 400 Bad Request handling.
-      const response = await fetch('http://localhost:8080/api/v1/events', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Sending invalid data to trigger validation errors
-        body: JSON.stringify({
-          title: "Fail", // Too short (< 5)
-          description: "Short", // Too short (< 5)
-          // date is missing
-          location: "" // Empty
-        }),
-      });
-
-      if (response.ok) {
-        toast.success('Inscrição realizada com sucesso!');
-      } else if (response.status === 400) {
-        const errorData = await response.json();
-        // errorData is like { field: "error message", ... }
-        Object.entries(errorData).forEach(([field, message]) => {
-          toast.error(`Erro no ${field}: ${message}`);
-        });
-      } else {
-        throw new Error('Serviço indisponível');
-      }
-    } catch (error) {
-      toast.error('Serviço indisponível. Tente novamente mais tarde.');
-    } finally {
-      setIsLoading(false);
+  const handleSubscribe = () => {
+    if (!isAuthenticated()) {
+      navigate(`/login?next=/events/${event.id}/register`);
+      return;
     }
+    navigate(`/events/${event.id}/register`);
   };
 
   return (
