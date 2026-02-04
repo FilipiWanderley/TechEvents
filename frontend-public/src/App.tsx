@@ -20,8 +20,8 @@ function App() {
             <div className="flex justify-between h-20 items-center">
               
               <div className="flex-shrink-0 flex items-center">
-                <Link to="/" className="text-2xl font-bold text-blue-900 tracking-tight hover:text-blue-700 transition-colors">
-                  TechEvents
+                <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+                  <img src="/logo.svg" alt="TechEvents Logo" className="h-10 w-auto" />
                 </Link>
               </div>
               
@@ -108,10 +108,10 @@ function App() {
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center">
                <div className="flex items-center">
-                  <span className="text-xl font-bold text-gray-900 tracking-tight">TechEvents</span>
+                  <img src="/logo.svg" alt="TechEvents Logo" className="h-12 w-auto" />
                </div>
                <p className="text-gray-400 text-sm">
-                 &copy; 2024 TechEvents. Todos os direitos reservados.
+                 &copy; 2026 TechEvents. Todos os direitos reservados.
                </p>
             </div>
           </div>

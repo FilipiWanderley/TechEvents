@@ -13,14 +13,17 @@
   flex-direction: column;
   
   .logo {
-    padding: 24px;
-    font-size: 20px;
-    font-weight: 500;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     
-    .highlight {
-      font-weight: 700;
-      color: #60a5fa; /* Light Blue */
+    img {
+      filter: brightness(0) invert(1);
+      max-width: 140px;
+      height: auto;
+      max-height: 60px; /* Limit height to keep it reasonable */
     }
   }
 
@@ -153,16 +156,24 @@
         font-weight: 500;
         
         .avatar {
-          width: 32px;
-          height: 32px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           background-color: #e2e8f0;
           color: #64748b;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 12px;
-          font-weight: 700;
+          overflow: hidden;
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          
+          img {
+            width: 65%;
+            height: 65%;
+            object-fit: contain;
+            padding: 0;
+          }
         }
       }
     }
